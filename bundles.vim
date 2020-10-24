@@ -8,13 +8,34 @@ call vundle#rc()
 " required!
 Bundle 'gmarik/vundle'
 
+Bundle 'lfv89/vim-interestingwords'
+Bundle 'octol/vim-cpp-enhanced-highlight'
+
+Bundle 'Yggdroot/LeaderF', { 'do': './install.sh' }
+Bundle 'junegunn/fzf', { 'do': { -> fzf#install() }}
+Bundle 'ludovicchabant/vim-gutentags'
+Bundle 'jsfaint/gen_tags.vim'
+
+"------------------
+" Text object
+" ----------------
+Bundle 'kana/vim-textobj-user'
+Bundle 'kana/vim-textobj-indent'
+Bundle 'kana/vim-textobj-syntax'
+Bundle 'kana/vim-textobj-function', { 'for':['c', 'cpp', 'vim', 'java'] }
+Bundle 'sgur/vim-textobj-parameter'
+
 "------------------
 " Code Completions
 "------------------
-Bundle 'Shougo/neocomplcache'
-Bundle 'mattn/emmet-vim'
+" Bundle 'Shougo/deoplete.nvim'
+" Bundle 'roxma/nvim-yarp'
+" Bundle 'roxma/vim-hug-neovim-rpc'
+" Bundle 'deoplete-plugins/deoplete-tag'
+Bundle 'ycm-core/YouCompleteMe'
+" Bundle 'mattn/emmet-vim'
 Bundle 'Raimondi/delimitMate'
-Bundle 'ervandew/supertab'
+" Bundle 'ervandew/supertab'
 " snippets
 Bundle 'garbas/vim-snipmate'
 Bundle 'honza/vim-snippets'
@@ -25,7 +46,9 @@ Bundle 'tomtom/tlib_vim'
 "-----------------
 " Fast navigation
 "-----------------
-Bundle 'edsono/vim-matchit'
+"Bundle 'edsono/vim-matchit'
+Bundle 'adelarsq/vim-matchit'
+Bundle 'andymass/vim-matchup'
 Bundle 'Lokaltog/vim-easymotion'
 
 "--------------
@@ -44,7 +67,6 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'humiaozuzu/TabBar'
 Bundle 'majutsushi/tagbar'
 Bundle 'mileszs/ack.vim'
-Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'scrooloose/syntastic'

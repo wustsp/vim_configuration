@@ -14,7 +14,7 @@ syntax on
 "--------
 " color scheme
 set background=dark
-color solarized
+" color solarized
 
 " highlight current line
 au WinLeave * set nocursorline nocursorcolumn
@@ -48,14 +48,14 @@ set matchpairs+=<:>                                               " specially fo
 " set relativenumber
 
 " Default Indentation
-set autoindent
-set smartindent     " indent when
-set tabstop=4       " tab width
-set softtabstop=4   " backspace
-set shiftwidth=4    " indent width
+" set autoindent
+" set smartindent     " indent when
+" set tabstop=8       " tab width
+" set softtabstop=4   " backspace
+" set shiftwidth=4    " indent width
 " set textwidth=79
 " set smarttab
-set expandtab       " expand tab to space
+set noexpandtab       " expand tab to space
 
 autocmd FileType php setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=120
 autocmd FileType ruby setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=120
@@ -160,40 +160,10 @@ let g:user_emmet_expandabbr_key='<C-j>'
 " powerline
 "let g:Powerline_symbols = 'fancy'
 
-" NeoComplCache
-let g:neocomplcache_enable_at_startup=1
-let g:neoComplcache_disableautocomplete=1
-"let g:neocomplcache_enable_underbar_completion = 1
-"let g:neocomplcache_enable_camel_case_completion = 1
-let g:neocomplcache_enable_smart_case=1
-let g:neocomplcache_min_syntax_length = 3
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-set completeopt-=preview
-
-imap <C-k> <Plug>(neocomplcache_snippets_force_expand)
-smap <C-k> <Plug>(neocomplcache_snippets_force_expand)
-imap <C-l> <Plug>(neocomplcache_snippets_force_jump)
-smap <C-l> <Plug>(neocomplcache_snippets_force_jump)
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType c setlocal omnifunc=ccomplete#Complete
-if !exists('g:neocomplcache_omni_patterns')
-  let g:neocomplcache_omni_patterns = {}
-endif
-let g:neocomplcache_omni_patterns.erlang = '[a-zA-Z]\|:'
-
 " SuperTab
 " let g:SuperTabDefultCompletionType='context'
 let g:SuperTabDefaultCompletionType = '<C-X><C-U>'
 let g:SuperTabRetainCompletionType=2
-
-" ctrlp
-set wildignore+=*/tmp/*,*.so,*.o,*.a,*.obj,*.swp,*.zip,*.pyc,*.pyo,*.class,.DS_Store  " MacOSX/Linux
-let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
 
 " Keybindings for plugin toggle
 nnoremap <F2> :set invpaste paste?<CR>
@@ -266,3 +236,93 @@ if has("gui_running")
     map <D-9> 9gt
     map <D-0> :tablast<CR>
 endif
+
+let g:go_version_warning = 0
+
+" for doplete
+" let g:deoplete#enable_at_startup = 1
+" call deoplete#custom#option('sources', {
+		" \ '_': ['buffer'],
+		" \ 'cpp': ['buffer', 'tag'],
+		" \ 'cc': ['buffer', 'tag'],
+		" \ 'h': ['buffer', 'tag'],
+		" \})
+
+" for YouCompleteMe
+let g:ycm_global_ycm_extra_conf = '.vim/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
+let g:ycm_add_preview_to_completeopt = 0
+let g:ycm_show_diagnostics_ui = 0
+let g:ycm_server_log_level = 'info'
+let g:ycm_min_num_identifier_candidate_chars = 2
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_complete_in_strings=1
+let g:ycm_key_invoke_completion = '<c-z>'
+set completeopt=menu,menuone
+
+noremap <c-z> <NOP>
+
+let g:ycm_semantic_triggers =  {
+           \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+           \ 'cs,lua,javascript': ['re!\w{2}'],
+           \ }
+
+set tags=./.tags;,.tags
+
+" gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
+
+" 所生成的数据文件的名称
+let g:gutentags_ctags_tagfile = '.tags'
+
+" 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
+let s:vim_tags = expand('~/.cache/tags')
+let g:gutentags_cache_dir = s:vim_tags
+
+" 配置 ctags 的参数
+let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+
+" 检测 ~/.cache/tags 不存在就新建
+if !isdirectory(s:vim_tags)
+   silent! call mkdir(s:vim_tags, 'p')
+endif
+
+" For octol/vim-cpp-enhanced-highlight
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+let g:cpp_posix_standard = 1
+"let g:cpp_experimental_simple_template_highlight = 1
+let g:cpp_experimental_template_highlight = 1
+let g:cpp_concepts_highlight = 1
+let g:cpp_no_function_highlight = 1
+
+" For LeaderF
+let g:Lf_GtagsAutoGenerate = 1
+let g:Lf_Gtagslabel = 'native-pygments'
+noremap <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
+noremap <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
+noremap <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
+noremap <leader>fn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>
+noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
+
+let g:Lf_ShortcutF = '<c-p>'
+let g:Lf_ShortcutB = '<m-n>'
+noremap <leader>m :LeaderfMru<cr>
+noremap <leader>f :LeaderfFunction!<cr>
+noremap <leader>b :LeaderfBuffer<cr>
+noremap <leader>t :LeaderfTag<cr>
+nnoremap <silent> <Leader>rg :Leaderf rg<CR>
+let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
+
+let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
+let g:Lf_WorkingDirectoryMode = 'Ac'
+let g:Lf_WindowHeight = 0.30
+let g:Lf_CacheDirectory = expand('~/.vim/cache')
+let g:Lf_ShowRelativePath = 0
+let g:Lf_HideHelp = 1
+let g:Lf_StlColorscheme = 'powerline'
+let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
+
+let g:gen_tags#gtags_default_map = 1
