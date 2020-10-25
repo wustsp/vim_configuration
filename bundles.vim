@@ -8,8 +8,6 @@ call vundle#rc()
 " required!
 Bundle 'gmarik/vundle'
 
-Bundle 'lfv89/vim-interestingwords'
-Bundle 'octol/vim-cpp-enhanced-highlight'
 
 Bundle 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Bundle 'junegunn/fzf', { 'do': { -> fzf#install() }}
@@ -63,12 +61,15 @@ Bundle 'nathanaelkane/vim-indent-guides'
 "--------------
 " IDE features
 "--------------
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'lfv89/vim-interestingwords'
+Bundle 'octol/vim-cpp-enhanced-highlight'
+
 Bundle 'scrooloose/nerdtree'
 Bundle 'humiaozuzu/TabBar'
 Bundle 'majutsushi/tagbar'
 Bundle 'mileszs/ack.vim'
 Bundle 'tpope/vim-fugitive'
-Bundle 'Lokaltog/vim-powerline'
 Bundle 'scrooloose/syntastic'
 Bundle 'bronson/vim-trailing-whitespace'
 
@@ -116,12 +117,16 @@ Bundle 'kien/rainbow_parentheses.vim'
 "--------------
 " Color Schemes
 "--------------
-Bundle 'rickharris/vim-blackboard'
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'rickharris/vim-monokai'
-Bundle 'tpope/vim-vividchalk'
-Bundle 'Lokaltog/vim-distinguished'
-Bundle 'chriskempson/vim-tomorrow-theme'
-Bundle 'fisadev/fisa-vim-colorscheme'
+Bundle 'tomasr/molokai'
+Bundle 'vim-scripts/phd'
+
+" Bundle 'rickharris/vim-blackboard'
+" Bundle 'altercation/vim-colors-solarized'
+" Bundle 'rickharris/vim-monokai'
+" Bundle 'tpope/vim-vividchalk'
+" Bundle 'Lokaltog/vim-distinguished'
+" Bundle 'chriskempson/vim-tomorrow-theme'
+" Bundle 'fisadev/fisa-vim-colorscheme'
 
 filetype plugin indent on     " required!

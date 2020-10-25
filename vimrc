@@ -1,10 +1,18 @@
 source ~/.vim/bundles.vim
 
+" define <Leader> key
+let mapleader=";"
+
 " encoding dectection
 set fileencodings=utf-8,gb2312,gb18030,gbk,ucs-bom,cp936,latin1
 
 " enable filetype dectection and ft specific plugin/indent
+filetype on
 filetype plugin indent on
+
+" 定义快捷键到行首和行尾
+nmap lb 0
+nmap le $
 
 " enable syntax hightlight and completion
 syntax on
@@ -14,56 +22,78 @@ syntax on
 "--------
 " color scheme
 set background=dark
-" color solarized
+colorscheme solarized
+"colorscheme phd
+"colorscheme molokai
 
-" highlight current line
-au WinLeave * set nocursorline nocursorcolumn
-au WinEnter * set cursorline cursorcolumn
-set cursorline cursorcolumn
-
-" search
+" 开启实时搜索功能
 set incsearch
-"set highlight 	" conflict with highlight current line
+" 搜索时大小写不敏感
 set ignorecase
-set smartcase
+" 关闭兼容模式
+set nocompatible
+" vim 自身命令行模式智能补全
+set wildmenu
+
+" 总是显示状态栏
+set laststatus=2
+" 显示光标当前位置
+set ruler
+" 开启行号显示
+set number
+" 高亮显示当前行/列
+set cursorline
+set cursorcolumn
+" 高亮显示搜索结果
+set hlsearch
+
+" 禁止折行
+set nowrap
+
+" 设置状态栏主题风格
+let g:Powerline_colorscheme='solarized256'
+
+" 开启语法高亮功能
+syntax enable
+" 允许用指定语法高亮配色方案替换默认方案
+syntax on
+
+" 自适应不同语言的智能缩进
+filetype indent on
+" 将制表符扩展为空格
+set expandtab
+" 设置编辑时制表符占用空格数
+set tabstop=2
+" 设置格式化时制表符占用空格数
+set shiftwidth=2
+" 让 vim 把连续数量的空格视为一个制表符
+set softtabstop=2
+
+" 设置C语言文件缩进
+autocmd FileType c setlocal noexpandtab tabstop=8 shiftwidth=8 softtabstop=8
+
+" 基于缩进或语法进行代码折叠
+"set foldmethod=indent
+set foldmethod=syntax
+" 启动 vim 时关闭折叠代码
+set nofoldenable
 
 " editor settings
 set history=1000
-set nocompatible
-set nofoldenable                                                  " disable folding"
 set confirm                                                       " prompt when existing from an unsaved file
 set backspace=indent,eol,start                                    " More powerful backspacing
 set t_Co=256                                                      " Explicitly tell vim that the terminal has 256 colors "
 set mouse=a                                                       " use mouse in all modes
 set report=0                                                      " always report number of lines changed                "
-set nowrap                                                        " dont wrap lines
 set scrolloff=5                                                   " 5 lines above/below cursor when scrolling
-set number                                                        " show line numbers
 set showmatch                                                     " show matching bracket (briefly jump)
 set showcmd                                                       " show typed command in status bar
 set title                                                         " show file in titlebar
-set laststatus=2                                                  " use 2 lines for the status bar
 set matchtime=2                                                   " show matching bracket for 0.2 seconds
 set matchpairs+=<:>                                               " specially for html
 " set relativenumber
 
-" Default Indentation
-" set autoindent
-" set smartindent     " indent when
-" set tabstop=8       " tab width
-" set softtabstop=4   " backspace
-" set shiftwidth=4    " indent width
-" set textwidth=79
-" set smarttab
-set noexpandtab       " expand tab to space
 
-autocmd FileType php setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=120
-autocmd FileType ruby setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=120
-autocmd FileType php setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=120
-autocmd FileType coffee,javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=120
-autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=120
-autocmd FileType html,htmldjango,xhtml,haml setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=0
-autocmd FileType sass,scss,css setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=120
 
 " syntax support
 autocmd Syntax javascript set syntax=jquery   " JQuery syntax support
@@ -265,8 +295,6 @@ let g:ycm_semantic_triggers =  {
            \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
            \ 'cs,lua,javascript': ['re!\w{2}'],
            \ }
-
-set tags=./.tags;,.tags
 
 " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
